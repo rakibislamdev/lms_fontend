@@ -478,22 +478,29 @@ const App = () => {
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
         <div
           style={{
-            height: "32px",
-            margin: "16px",
-            background: "rgba(255, 255, 255, 0.2)",
+            padding: "12px",
             textAlign: "center",
-            lineHeight: "32px",
             color: "white",
             fontWeight: "bold",
           }}
         >
-          {collapsed ? "LMS" : "Library System"}
+          {/* {collapsed ? "LMS" : "Library System"} */}
+          <img src="logo.png" alt="Logo" style={{ height: "50px" }} />
         </div>
         <Menu
           theme="dark"
           defaultSelectedKeys={["Dashboard"]}
           mode="inline"
           onClick={handleMenuClick}
+          style={{ 
+            height: "calc(100vh - 122px)",
+            overflowY: "auto",
+            scrollbarWidth: "none",
+            "-ms-overflow-style": "none",
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
+           }}
         >
           <Menu.Item key="Dashboard" icon={<DashboardOutlined />}>
             Dashboard
@@ -582,7 +589,6 @@ const App = () => {
               padding: 24,
               background: "#fff",
               overflowY: "auto",
-              // i want to hide scrollbar
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
