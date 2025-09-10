@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import api from '../api/axios';
 import { Button, Row, Col, Card, Space } from 'antd';
 
 import {
@@ -15,6 +14,7 @@ const COLORS = ['#8884d8', '#82ca9d', '#ffc658'];
 export default function Dashboard() {
   // eslint-disable-next-line no-unused-vars
   const [stats, setStats] = useState({ books: 0, members: 0, transactions: 0 });
+  // eslint-disable-next-line no-unused-vars
   const [monthlyTx, setMonthlyTx] = useState([
     { name: 'Jan 24', count: 20 },
     { name: 'Feb 24', count: 35 },
@@ -27,11 +27,26 @@ export default function Dashboard() {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const books = await api.get('/books');
-        const members = await api.get('/members');
-        const tx = await api.get('/transactions');
+        // const books = await api.get('/books');
+        // const members = await api.get('/members');
+        // const tx = await api.get('/transactions');
+        const tx = { data: [
+          { issueDate: '2024-01-15' },
+          { issueDate: '2024-01-20' },
+          { issueDate: '2024-02-10' },
+          { issueDate: '2024-02-25' },
+          { issueDate: '2024-03-05' },
+          { issueDate: '2024-03-15' },
+          { issueDate: '2024-04-01' },
+          { issueDate: '2024-04-18' },
+          { issueDate: '2024-05-22' },
+          { issueDate: '2024-06-03' },
+          { issueDate: '2024-06-14' },
+          { issueDate: '2024-06-20' },
+        ] };
 
-        setStats({ books: books.data.length, members: members.data.length, transactions: tx.data.length });
+        // setStats({ books: books.data.length, members: members.data.length, transactions: tx.data.length });
+        setStats({ books: 5, members: 10, transactions: 15 });
 
         // Process monthly transactions for the past 6 months
         const monthsMap = {};
@@ -50,8 +65,8 @@ export default function Dashboard() {
             }
           }
         });
-        const monthlyData = Object.entries(monthsMap).map(([name, count]) => ({ name, count }));
-        setMonthlyTx(monthlyData);
+        // const monthlyData = Object.entries(monthsMap).map(([name, count]) => ({ name, count }));
+        // setMonthlyTx(monthlyData);
       } catch (err) {
         console.error(err);
       }
