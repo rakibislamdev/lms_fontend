@@ -1,3 +1,29 @@
+// import React from 'react';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import Login from './pages/Login';
+// import Dashboard from './pages/Dashboard';
+// import Books from './pages/Books';
+// import Members from './pages/Members';
+// import Transactions from './pages/Transactions';
+// import { AuthProvider } from './auth/AuthProvider';
+// import ProtectedRoute from './components/ProtectedRoute';
+
+// export default function App() {
+//   return (
+//     <AuthProvider>
+//       <BrowserRouter>
+//         <Routes>
+//           <Route path="/login" element={<Login />} />
+//           <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+//           <Route path="/books" element={<ProtectedRoute><Books /></ProtectedRoute>} />
+//           <Route path="/members" element={<ProtectedRoute><Members /></ProtectedRoute>} />
+//           <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
+//         </Routes>
+//       </BrowserRouter>
+//     </AuthProvider>
+//   );
+// }
+
 import React from 'react';
 import { Layout, Menu, Breadcrumb, Card, Row, Col, Table, Tag, Space, Button, Input, Form, Modal, Select, DatePicker } from 'antd';
 import {
@@ -31,6 +57,7 @@ import {
     QuestionCircleOutlined,
     StopOutlined
 } from '@ant-design/icons';
+import Dashboard from './pages/Dashboard';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -208,50 +235,50 @@ const GenericCrudPage = ({ pageTitle, columns, data, formFields }) => {
 
 // --- Page Components ---
 
-const Dashboard = () => (
-    <div className="site-card-wrapper">
-        <Row gutter={16}>
-            <Col span={6}>
-                <Card title="Total Books" bordered={false}>
-                    <p style={{ fontSize: 24, fontWeight: 'bold' }}>1,250</p>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Members" bordered={false}>
-                    <p style={{ fontSize: 24, fontWeight: 'bold' }}>350</p>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Books Borrowed" bordered={false}>
-                    <p style={{ fontSize: 24, fontWeight: 'bold' }}>120</p>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Overdue Books" bordered={false}>
-                    <p style={{ fontSize: 24, fontWeight: 'bold' }}>15</p>
-                </Card>
-            </Col>
-        </Row>
-        <Row gutter={16} style={{ marginTop: 24 }}>
-            <Col span={12}>
-                <Card title="Recent Activity">
-                    <p>Alice Johnson borrowed 'To Kill a Mockingbird'.</p>
-                    <p>New book 'Dune' added to the collection.</p>
-                    <p>Bob Smith renewed his Gold membership.</p>
-                </Card>
-            </Col>
-            <Col span={12}>
-                <Card title="Quick Actions">
-                    <Space>
-                        <Button type="primary">Add New Book</Button>
-                        <Button>Add New Member</Button>
-                        <Button>Issue a Book</Button>
-                    </Space>
-                </Card>
-            </Col>
-        </Row>
-    </div>
-);
+// const Dashboard = () => (
+//   <div className="site-card-wrapper">
+//     <Row gutter={16}>
+//       <Col span={6}>
+//         <Card title="Total Books" bordered={false}>
+//           <p style={{ fontSize: 24, fontWeight: 'bold' }}>1,250</p>
+//         </Card>
+//       </Col>
+//       <Col span={6}>
+//         <Card title="Members" bordered={false}>
+//           <p style={{ fontSize: 24, fontWeight: 'bold' }}>350</p>
+//         </Card>
+//       </Col>
+//       <Col span={6}>
+//         <Card title="Books Borrowed" bordered={false}>
+//           <p style={{ fontSize: 24, fontWeight: 'bold' }}>120</p>
+//         </Card>
+//       </Col>
+//       <Col span={6}>
+//         <Card title="Overdue Books" bordered={false}>
+//           <p style={{ fontSize: 24, fontWeight: 'bold' }}>15</p>
+//         </Card>
+//       </Col>
+//     </Row>
+//     <Row gutter={16} style={{ marginTop: 24 }}>
+//       <Col span={12}>
+//         <Card title="Recent Activity">
+//           <p>Alice Johnson borrowed 'To Kill a Mockingbird'.</p>
+//           <p>New book 'Dune' added to the collection.</p>
+//           <p>Bob Smith renewed his Gold membership.</p>
+//         </Card>
+//       </Col>
+//       <Col span={12}>
+//         <Card title="Quick Actions">
+//           <Space>
+//             <Button type="primary">Add New Book</Button>
+//             <Button>Add New Member</Button>
+//             <Button>Issue a Book</Button>
+//           </Space>
+//         </Card>
+//       </Col>
+//     </Row>
+//   </div>
+// );
 
 const Books = () => {
     const columns = [
@@ -446,61 +473,138 @@ const App = () => {
     };
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout style={{ minHeight: "100vh" }}>
+            {/* Sidebar */}
             <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-                <div style={{ height: '32px', margin: '16px', background: 'rgba(255, 255, 255, 0.2)', textAlign: 'center', lineHeight: '32px', color: 'white', fontWeight: 'bold' }}>
-                    {collapsed ? 'LMS' : 'Library System'}
+                <div
+                    style={{
+                        padding: "12px",
+                        textAlign: "center",
+                        color: "white",
+                        fontWeight: "bold",
+                    }}
+                >
+                    {/* {collapsed ? "LMS" : "Library System"} */}
+                    <img src="logo.png" alt="Logo" style={{ height: "50px" }} />
                 </div>
-                <Menu theme="dark" defaultSelectedKeys={['Dashboard']} mode="inline" onClick={handleMenuClick}>
+                <Menu
+                    theme="dark"
+                    defaultSelectedKeys={["Dashboard"]}
+                    mode="inline"
+                    onClick={handleMenuClick}
+                    style={{
+                        height: "calc(100vh - 122px)",
+                        overflowY: "auto",
+                        scrollbarWidth: "none",
+                        "-ms-overflow-style": "none",
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
+                    }}
+                >
                     <Menu.Item key="Dashboard" icon={<DashboardOutlined />}>
                         Dashboard
                     </Menu.Item>
 
                     <SubMenu key="sub1" icon={<BookOutlined />} title="Catalog">
-                        <Menu.Item key="Books" icon={<BookFilled />}>Books</Menu.Item>
-                        <Menu.Item key="Authors" icon={<UserSwitchOutlined />}>Authors</Menu.Item>
-                        <Menu.Item key="Genres" icon={<UnorderedListOutlined />}>Genres</Menu.Item>
-                        <Menu.Item key="Publishers" icon={<ContainerOutlined />}>Publishers</Menu.Item>
-                        <Menu.Item key="Book Languages" icon={<GlobalOutlined />}>Languages</Menu.Item>
-                        <Menu.Item key="Books Series" icon={<OrderedListOutlined />}>Book Series</Menu.Item>
-                        <Menu.Item key="Tags" icon={<TagsOutlined />}>Tags</Menu.Item>
+                        <Menu.Item key="Books" icon={<BookFilled />}>
+                            Books
+                        </Menu.Item>
+                        <Menu.Item key="Authors" icon={<UserSwitchOutlined />}>
+                            Authors
+                        </Menu.Item>
+                        <Menu.Item key="Genres" icon={<UnorderedListOutlined />}>
+                            Genres
+                        </Menu.Item>
+                        <Menu.Item key="Publishers" icon={<ContainerOutlined />}>
+                            Publishers
+                        </Menu.Item>
+                        <Menu.Item key="Book Languages" icon={<GlobalOutlined />}>
+                            Languages
+                        </Menu.Item>
+                        <Menu.Item key="Books Series" icon={<OrderedListOutlined />}>
+                            Book Series
+                        </Menu.Item>
+                        <Menu.Item key="Tags" icon={<TagsOutlined />}>
+                            Tags
+                        </Menu.Item>
                     </SubMenu>
 
                     <SubMenu key="sub2" icon={<SolutionOutlined />} title="Circulation">
-                        <Menu.Item key="Books Circulation" icon={<ScheduleOutlined />}>Circulation Log</Menu.Item>
-                        <Menu.Item key="Book Requests" icon={<QuestionCircleOutlined />}>Book Requests</Menu.Item>
-                        <Menu.Item key="Penalties" icon={<StopOutlined />}>Penalties</Menu.Item>
+                        <Menu.Item key="Books Circulation" icon={<ScheduleOutlined />}>
+                            Circulation Log
+                        </Menu.Item>
+                        <Menu.Item key="Book Requests" icon={<QuestionCircleOutlined />}>
+                            Book Requests
+                        </Menu.Item>
+                        <Menu.Item key="Penalties" icon={<StopOutlined />}>
+                            Penalties
+                        </Menu.Item>
                     </SubMenu>
 
                     <SubMenu key="sub3" icon={<TeamOutlined />} title="Members">
-                        <Menu.Item key="Members" icon={<UsergroupAddOutlined />}>Members List</Menu.Item>
-                        <Menu.Item key="Membership Plans" icon={<IdcardOutlined />}>Membership Plans</Menu.Item>
-                        <Menu.Item key="Subscriptions" icon={<CrownOutlined />}>Subscriptions</Menu.Item>
+                        <Menu.Item key="Members" icon={<UsergroupAddOutlined />}>
+                            Members List
+                        </Menu.Item>
+                        <Menu.Item key="Membership Plans" icon={<IdcardOutlined />}>
+                            Membership Plans
+                        </Menu.Item>
+                        <Menu.Item key="Subscriptions" icon={<CrownOutlined />}>
+                            Subscriptions
+                        </Menu.Item>
                     </SubMenu>
 
                     <SubMenu key="sub4" icon={<SettingOutlined />} title="System">
-                        <Menu.Item key="Users" icon={<UserOutlined />}>Users</Menu.Item>
-                        <Menu.Item key="Roles" icon={<ApartmentOutlined />}>Roles</Menu.Item>
+                        <Menu.Item key="Users" icon={<UserOutlined />}>
+                            Users
+                        </Menu.Item>
+                        <Menu.Item key="Roles" icon={<ApartmentOutlined />}>
+                            Roles
+                        </Menu.Item>
                     </SubMenu>
                 </Menu>
             </Sider>
-            <Layout className="site-layout">
-                <Header className="site-layout-background" style={{ padding: '0 16px', background: '#fff' }}>
-                    <h1 style={{ fontSize: '24px' }}>{activePage}</h1>
+
+            {/* Main Layout */}
+            <Layout className="site-layout h-full" style={{ display: "flex", flexDirection: "column" }}>
+                <Header
+                    className="site-layout-background"
+                    style={{ padding: "5px", background: "#fff", height: "50px", alignItems: 'center', display: 'flex', }}
+                >
+                    <span style={{ fontSize: "24px", fontWeight: "bold" }}>{activePage}</span>
                 </Header>
-                <Content style={{ margin: '0 16px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
+
+                {/* Content takes remaining height */}
+                <Content style={{ margin: "0 16px", height: 'calc(100vh - 90px)' }}>
+                    <Breadcrumb style={{ height: "40px", lineHeight: "40px" }}>
                         <Breadcrumb.Item>Library</Breadcrumb.Item>
                         <Breadcrumb.Item>{activePage}</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360, background: '#fff' }}>
+
+                    {/* Scrollable section */}
+                    <div
+                        className="site-layout-background content-section"
+                        style={{
+                            height: 'calc(100vh - 90px - 48px)',
+                            padding: 24,
+                            background: "#fff",
+                            overflowY: "auto",
+                            scrollbarWidth: "none",
+                            msOverflowStyle: "none",
+                        }}
+                    >
                         {pageComponents[activePage]}
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Library Management System ©2024 Developed by Rakib</Footer>
+
+                <Footer style={{ textAlign: "center", height: "40px", display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                    Library Management System ©2024 Develop by Rakib
+                </Footer>
             </Layout>
         </Layout>
     );
+
 };
 
 export default App;
+
